@@ -5,17 +5,18 @@ import 'firebase/auth';
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyABpuXaOtJITS2MssT7gS7ZH0_XU9sh_MQ",
-  
-    authDomain: "not-ut.firebaseapp.com",
-  
-    projectId: "not-ut",
-  
-    storageBucket: "not-ut.appspot.com",
-  
-    messagingSenderId: "359489523437",
-  
-    appId: "1:359489523437:web:c81443744aa863796bc6e4"
+  apiKey: "AIzaSyCRmy5AoHkbLBElUBu-3wgcl0jGlfLFRlo",
+
+  authDomain: "ut-not.firebaseapp.com",
+
+  projectId: "ut-not",
+
+  storageBucket: "ut-not.appspot.com",
+
+  messagingSenderId: "603228213391",
+
+  appId: "1:603228213391:web:2ce00dca4a673f285260fa"
+
   
   };
   
