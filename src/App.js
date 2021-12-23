@@ -5,8 +5,11 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
+import ChannelScreen from "./screens/channelScreen/ChannelScreen";
 import HomeScreen from "./screens/HomeScreen/HomeScreen";
 import LoginScreen from "./screens/loginScreen/LoginScreen";
+import SearchScreen from "./screens/SearchScreen";
+import SubscriptionsScreen from "./screens/subscriptionsScreen/SubscriptionsScreen";
 import WatchScreen from "./screens/watchScreen/WatchScreen";
 import './_app.scss';
 
@@ -59,15 +62,27 @@ useEffect(() => {
             <LoginScreen />
          </Route>
 
-         <Route path='/search'>
+         <Route path='/search/:query'>
             <Layout>
-               <h1>Search Results</h1>
+               <SearchScreen />
             </Layout>
          </Route>
 
          <Route path='/watch/:id'>
             <Layout>
                <WatchScreen />
+            </Layout>
+         </Route>
+
+         <Route path='/feed/subscriptions'>
+            <Layout>
+               <SubscriptionsScreen />
+            </Layout>
+         </Route>
+
+         <Route path='/channel/:channelId'>
+            <Layout>
+               <ChannelScreen />
             </Layout>
          </Route>
 

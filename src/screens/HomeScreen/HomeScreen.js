@@ -8,6 +8,7 @@ import { getPopularVideos, getVideosByCategory } from '../../redux/actions/video
 
 
 import SkeletonVideo from '../../components/skeletons/SkeletonVideo'
+import CustomHelmet from '../../components/CustomHelmet'
 
 const HomeScreen = () => {
 
@@ -28,6 +29,7 @@ const HomeScreen = () => {
     return (
         <div>
             <Container>
+                <CustomHelmet />
                 <CategoriesBar />
               
                     <InfiniteScroll
