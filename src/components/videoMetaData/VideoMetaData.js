@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import ShowMoreText from 'react-show-more-text';
 import { checkSubscriptionStatus, getChannelDetails } from '../../redux/actions/channel.action';
+import { rateVideo } from '../../redux/actions/videos.action';
 import CustomHelmet from '../CustomHelmet';
 import './_videoMetaData.scss'
 
@@ -29,6 +30,14 @@ const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
         dispatch(checkSubscriptionStatus(channelId))
      }, [dispatch, channelId])
 
+     const handleLikeVideo = async () => {
+        dispatch(rateVideo(videoId, "like"));
+      };
+    
+      const handleDislikeVideo = () => {
+        dispatch(rateVideo(videoId, "dislike"));
+      };
+
 
     return (
         <div className='videoMetaData py-2'>
@@ -44,8 +53,8 @@ const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
                     </span>
                 
                 <div >
-                    <span className='mr-3'><MdThumbUp size={26} /> {numeral(likeCount).format('0.a')}</span>
-                    <span className='mr-3'><MdThumbDown size={26} /> {numeral(dislikeCount).format('0.a')}</span>
+                    <span className='mr-3' ><MdThumbUp size={26}  onClick={handleLikeVideo}/> {numeral(likeCount).format('0.a')}</span>
+                    <span className='mr-3'><MdThumbDown size={26} onClick={handleDislikeVideo} /> {numeral(dislikeCount).format('0.a')}</span>
                 </div>
                 </div>
             </div>

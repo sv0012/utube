@@ -37,7 +37,7 @@ const Header = ({ handleToggleSidebar }) => {
          <div className="header__icons mr">
             <img
                src={user?.photoURL}
-               alt="avatar"
+               alt=""
             />
          </div>
         </div>

@@ -7,6 +7,7 @@ import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 import ChannelScreen from "./screens/channelScreen/ChannelScreen";
 import HomeScreen from "./screens/HomeScreen/HomeScreen";
+import LikedVideosScreen from "./screens/LikedVideosScreen";
 import LoginScreen from "./screens/loginScreen/LoginScreen";
 import SearchScreen from "./screens/SearchScreen";
 import SubscriptionsScreen from "./screens/subscriptionsScreen/SubscriptionsScreen";
@@ -77,6 +78,11 @@ useEffect(() => {
          <Route path='/feed/subscriptions'>
             <Layout>
                <SubscriptionsScreen />
+            </Layout>
+         </Route>
+         <Route path='/feed/likedVideos'>
+            <Layout>
+               <LikedVideosScreen />
             </Layout>
          </Route>
 

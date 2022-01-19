@@ -17,6 +17,9 @@ import {
     SUBSCRIPTIONS_CHANNEL_FAIL,
     SUBSCRIPTIONS_CHANNEL_REQUEST,
     SUBSCRIPTIONS_CHANNEL_SUCCESS,
+    LIKED_VIDEOS_SUCCESS,
+   LIKED_VIDEOS_REQUEST,
+   LIKED_VIDEOS_FAILED
  } from '../actionType'
  
  export const homeVideosReducer = (
@@ -217,6 +220,39 @@ export const channelVideosReducer = (
             loading: false,
          }
       case CHANNEL_VIDEOS_FAIL:
+         return {
+            ...state,
+            loading: false,
+            error: payload,
+         }
+
+      default:
+         return state
+   }
+}
+
+export const likedVideosReducer = (
+   state = { loading: true, videos: null },
+   action
+) => {
+   const { type, payload } = action
+
+   switch (type) {
+      case LIKED_VIDEOS_SUCCESS:
+         return {
+            ...state,
+            videos: payload,
+            loading: false,
+            error: null,
+         }
+
+      case LIKED_VIDEOS_REQUEST:
+         return {
+            ...state,
+            loading: true,
+         }
+
+      case LIKED_VIDEOS_FAILED:
          return {
             ...state,
             loading: false,

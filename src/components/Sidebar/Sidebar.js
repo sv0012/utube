@@ -3,8 +3,6 @@ import React from 'react';
 import {
     MdExitToApp,
     MdThumbUp,
-    MdHistory,
-    MdLibraryBooks,
     MdHome,
     MdSubscriptions,
  } from 'react-icons/md';
@@ -38,19 +36,13 @@ const Sidebar = ({sidebar,handleToggleSidebar}) => {
             </li>
          </Link>
          <li>
+         <Link to='/feed/likedVideos'>
             <MdThumbUp size={23} />
-            <span>Liked Video</span>
+            <span>Liked Videos</span>
+         </Link>   
          </li>
 
-         <li>
-            <MdHistory size={23} />
-            <span>History</span>
-         </li>
-
-         <li>
-            <MdLibraryBooks size={23} />
-            <span>Library</span>
-         </li>
+        
       
 
          <hr />

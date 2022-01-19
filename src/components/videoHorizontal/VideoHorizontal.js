@@ -8,6 +8,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Col, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
+
 const VideoHorizontal = ({ video,searchScreen,subScreen }) => {
    const {
       id,
@@ -22,6 +23,7 @@ const VideoHorizontal = ({ video,searchScreen,subScreen }) => {
       },
    } = video
 
+ 
    const isVideo = !(id.kind === 'youtube#channel' || subScreen)
    const [views, setViews] = useState(null)
    const [duration, setDuration] = useState(null)
@@ -53,11 +55,12 @@ const VideoHorizontal = ({ video,searchScreen,subScreen }) => {
                part: 'snippet',
                id: channelId,
             },
+           
          })
          setChannelIcon(items[0].snippet.thumbnails.default)
       }
-      get_channel_icon()
-   }, [channelId])
+      if(isVideo) get_channel_icon()
+   }, [channelId,isVideo])
 
    const seconds = moment.duration(duration).asSeconds()
    const _duration = moment.utc(seconds * 1000).format('mm:ss')
@@ -81,9 +84,9 @@ const VideoHorizontal = ({ video,searchScreen,subScreen }) => {
                className={`videoHorizontal__thumbnail ${thumbnail} `}
                wrapperClassName='videoHorizontal__thumbnail-wrapper'
             />
-             {isVideo && (
+             {isVideo ? (
                <span className='videoHorizontal__duration'>{_duration}</span>
-            )}
+            ) : null}
          </Col>
          <Col xs={6} md={searchScreen || subScreen ? 8 : 6} className='videoHorizontal__right p-0'>
             <p className='mb-1 videoHorizontal__title'>{title}</p>
@@ -104,6 +107,11 @@ const VideoHorizontal = ({ video,searchScreen,subScreen }) => {
                )}
                <p className='mb-0'>{channelTitle}</p>
             </div>
+            {subScreen && (
+               <p className='mt-2'>
+                  {video.contentDetails.totalItemCount} Videos
+               </p>
+            )}
          </Col>
 
       </Row>

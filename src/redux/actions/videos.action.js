@@ -1,4 +1,26 @@
-import { CHANNEL_DETAILS_FAIL, CHANNEL_VIDEOS_REQUEST, CHANNEL_VIDEOS_SUCCESS, HOME_VIDEOS_FAIL, HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, RELATED_VIDEO_FAIL, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, SEARCHED_VIDEO_FAIL, SEARCHED_VIDEO_REQUEST, SEARCHED_VIDEO_SUCCESS, SELECTED_VIDEO_FAIL, SELECTED_VIDEO_REQUEST, SELECTED_VIDEO_SUCCESS, SUBSCRIPTIONS_CHANNEL_FAIL, SUBSCRIPTIONS_CHANNEL_REQUEST, SUBSCRIPTIONS_CHANNEL_SUCCESS } from '../actionType';
+import { CHANNEL_DETAILS_FAIL, 
+   CHANNEL_VIDEOS_REQUEST, 
+   CHANNEL_VIDEOS_SUCCESS, 
+   HOME_VIDEOS_FAIL, 
+   HOME_VIDEOS_REQUEST,
+    HOME_VIDEOS_SUCCESS,
+     LIKED_VIDEOS_FAILED, 
+     LIKED_VIDEOS_REQUEST, 
+     LIKED_VIDEOS_SUCCESS, 
+     RATE_VIDEO_FAIL, 
+     RATE_VIDEO_SUCCESS, 
+     RELATED_VIDEO_FAIL, 
+     RELATED_VIDEO_REQUEST, 
+     RELATED_VIDEO_SUCCESS, 
+     SEARCHED_VIDEO_FAIL,
+      SEARCHED_VIDEO_REQUEST, 
+      SEARCHED_VIDEO_SUCCESS, 
+      SELECTED_VIDEO_FAIL, 
+      SELECTED_VIDEO_REQUEST, 
+      SELECTED_VIDEO_SUCCESS, 
+      SUBSCRIPTIONS_CHANNEL_FAIL, 
+      SUBSCRIPTIONS_CHANNEL_REQUEST, 
+      SUBSCRIPTIONS_CHANNEL_SUCCESS } from '../actionType';
 import request from '../../api';
 
 export const getPopularVideos = () => async (dispatch, getState) => {
@@ -210,6 +232,59 @@ export const getVideosByChannel = id => async dispatch => {
       dispatch({
          type: CHANNEL_DETAILS_FAIL,
          payload: error.response.data,
+      })
+   }
+}
+
+
+export const getLikedVideos = () => async (dispatch, getState) => {
+   dispatch({
+      type: LIKED_VIDEOS_REQUEST,
+   })
+
+   try {
+      const { data } = await request('/videos', {
+         params: {
+            myRating: 'like',
+            part: 'contentDetails,snippet,statistics',
+            maxResults: 16,
+         },
+         headers: { Authorization: `Bearer ${getState()?.auth.accessToken}` },
+      })
+      const { items } = data
+      // console.log(items, nextPageToken);
+
+      dispatch({
+         type: LIKED_VIDEOS_SUCCESS,
+         payload: items,
+      })
+   } catch (error) {
+      console.log(error)
+      console.log(error.message)
+      dispatch({
+         type: LIKED_VIDEOS_FAILED,
+         payload: error.message,
+      })
+   }
+}
+
+export const rateVideo = (id, type) => async (dispatch, getState) => {
+   try {
+      await request.post('/videos/rate', null, {
+         params: {
+            id: id,
+            rating: type,
+         },
+         headers: { Authorization: `Bearer ${getState()?.auth.accessToken}` },
+      })
+      dispatch({
+         type: RATE_VIDEO_SUCCESS,
+      })
+   } catch (error) {
+      console.log(error.message)
+      dispatch({
+         type: RATE_VIDEO_FAIL,
+         payload: error.message,
       })
    }
 }

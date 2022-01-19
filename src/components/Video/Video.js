@@ -6,6 +6,7 @@ import moment from 'moment';
 import numeral from 'numeral';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Video = ({video,channelScreen}) => {
    const {
@@ -20,6 +21,7 @@ const Video = ({video,channelScreen}) => {
       contentDetails,
    } = video
 
+   const accessToken = useSelector(state => state.auth.accessToken)
    const [views, setViews] = useState(null)
    const [duration, setDuration] = useState(null)
    const [channelIcon, setChannelIcon] = useState(null)
@@ -59,11 +61,12 @@ const Video = ({video,channelScreen}) => {
                part: 'snippet',
                id: channelId,
             },
+            headers: { Authorization: `Bearer ${accessToken}` },
          })
          setChannelIcon(items[0].snippet.thumbnails.default)
       }
       get_channel_icon()
-   }, [channelId])
+   }, [channelId,accessToken])
 
    const handleVideoClick = () => {
       history.push(`/watch/${_videoId}`)

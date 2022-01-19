@@ -13,8 +13,10 @@ import './_channelScreen.scss'
 import Video from '../../components/Video/Video'
 import CustomHelmet from '../../components/CustomHelmet'
 
+
 const ChannelScreen = () => {
-   const { channelId } = useParams()
+   const { channelId } = useParams();
+ 
 
    const dispatch = useDispatch()
 
@@ -27,8 +29,6 @@ const ChannelScreen = () => {
    const { snippet, statistics } = useSelector(
       state => state.channelDetails.channel
    )
-
-   console.log(videos)
 
    return (
       <>
@@ -45,7 +45,7 @@ const ChannelScreen = () => {
                </div>
             </div>
 
-            <button>Subscribe</button>
+           
          </div>
 
          <Container>
